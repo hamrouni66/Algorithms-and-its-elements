@@ -1,0 +1,48 @@
+ALGORITHM compute_phrase
+VAR
+    phrase: STRING;
+    cpt_car: INTEGER;
+    cpt_mot: INTEGER;
+    cpt_voy: INTEGER;
+    car_courant: CHAR;
+    voyelles = "aeiouAEIOU";
+BEGIN
+//input
+   Write("Donnez moi la phrase a traiter qui se termine par un point : ")
+   Read(phrase)
+//initialisation
+    cpt_car := 0;
+    cpt_mot := 0;
+    cpt_voy := 0;
+   // traitement
+    car_courant := phrase[0];
+WHILE ((car_courant <>'.')) DO
+   //rajouter 1 nombre de caractere
+      cpt_car := cpt_car + 1;   
+   //rajouter 1 nombre de voyelle
+      IF (car_courant = 'a' OR car_courant = 'e' OR car_courant = 'i' OR car_courant = 'o' OR car_courant = 'u' OR car_courant = 'y') THEN
+         cpt_voy := cpt_voy + 1;
+      ENDIF
+  //rajouter 1 nombre de voyelle - methode avec position
+      if Pos(car_courant, voyelles)<> -1 then
+         cpt_voy := cpt_voy + 1;
+         
+      ENDIF
+   //rajouter 1 nombre de mot
+      IF (car_courant = ' ') THEN
+         cpt_mot := cpt_mot + 1;
+      ENDIF
+      //chargement pour la condition de boucle
+      car_courant := phrase[cpt_car];
+
+END_WHILE
+
+// j'ai touve le point '.' fin de phrase
+    cpt_mot := cpt_mot + 1; // pour le dernier mot avant le point
+    cpt_car := cpt_car + 1; // pour le point '.'
+
+//output
+   Write("Le nombre de caractere dans cette phrase est de : ", cpt_car);
+   Write("Le nombre de mot dans cette phrase est de : ", cpt_mot);
+   Write("Le nombre de voyelle dans cette phrase est de : ", cpt_voy);
+END
